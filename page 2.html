@@ -1,98 +1,76 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аліас - Ігрова Сторінка</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #c1f4d1, #ffd7b5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
-        .progress-bar {
-            width: 90%;
-            height: 20px;
-            background-color: #e0e0e0;
-            margin: 10px auto;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .progress {
-            width: 40%; /* Тут змінюйте ширину для відображення прогресу */
-            height: 100%;
-            background-color: #d32f2f;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            width: 90%;
-            margin-top: 10px;
-            font-size: 1.2em;
-        }
-        .card {
-            background-color: white;
-            width: 300px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 2em;
-            font-weight: bold;
-        }
-        .controls {
-            display: flex;
-            justify-content: space-around;
-            width: 90%;
-        }
-        .button {
-            width: 100px;
-            height: 50px;
-            font-size: 1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button-red {
-            background-color: #d32f2f;
-            color: white;
-        }
-        .button-red:hover {
-            background-color: #a82828;
-        }
-        .button-green {
-            background-color: #388e3c;
-            color: white;
-        }
-        .button-green:hover {
-            background-color: #2e7030;
-        }
-        .menu {
-            background-color: #fff9c4;
-            color: #000;
-        }
-        .menu:hover {
-            background-color: #f0e68c;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аліас - Гра</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .card-border {
+      position: absolute;
+      top: 0.35rem;
+      left: 0.35rem;
+      right: 0.35rem;
+      bottom: 0.35rem;
+      border: 1px solid black; 
+      border-radius: 1rem;  
+      pointer-events: none;
+      z-index: 1;
+    }
+    .card {
+      border-radius: 1rem;
+    }
+  </style>
 </head>
-<body>
-    <div class="header">
-        <div>1 РАУНД</div>
-        <div>38</div>
-        <div>1 КОМАНДА</div>
+<body class="flex flex-col min-h-screen items-center justify-center bg-gradient-to-br from-green-100 to-orange-100">
+  <header class="bg-white w-full max-w-md p-4 shadow-lg rounded-xl mb-4">
+    <div class="flex justify-between items-center">
+      <span class="text-xs font-bold">1 РАУНД</span>
+      <span id="timer" class="text-xs font-bold">38</span>
+      <span class="text-xs font-bold">1 КОМАНДА</span>
     </div>
-    <div class="progress-bar">
-        <div class="progress"></div>
+    <div class="w-full h-2 bg-gray-300 rounded-full mt-2">
+      <div id="progressBar" class="h-2 bg-red-700 rounded-full" style="width: 70%;"></div>
     </div>
-    <div class="card">МАШИНА</div>
-    <div class="controls
+  </header>
+
+  <main class="relative w-full h-full flex items-center justify-center overflow-hidden mb-6">
+    <div id="cardContainer" class="card relative bg-white w-48 h-64 shadow-lg flex items-center justify-center">
+      <div class="card-border"></div>
+      <span class="text-lg font-bold">МАШИНА</span>
+    </div>
+  </main>
+
+  <div class="flex justify-center items-center gap-12 mb-6">
+    <button id="crossBtn" class="w-24 h-16 bg-white rounded-lg shadow-lg flex items-center justify-center">
+      <i class="fas fa-times text-red-500 text-4xl"></i>
+    </button>
+    <button id="checkBtn" class="w-24 h-16 bg-white rounded-lg shadow-lg flex items-center justify-center">
+      <i class="fas fa-check text-green-500 text-4xl"></i>
+    </button>
+  </div>
+
+<footer class="bg-white w-full max-w-md p-4 shadow-lg rounded-xl">
+  <div class="flex justify-around">
+    <button class="w-32 h-10 bg-yellow-100 rounded-full border border-black text-sm font-bold">МЕНЮ</button>
+    <button class="w-32 h-10 bg-yellow-100 rounded-full border border-black text-sm font-bold">ПРОДОВЖИТИ</button>
+  </div>
+</footer>
+  <script>
+    const cardContainer = document.getElementById('cardContainer');
+    const checkBtn = document.getElementById('checkBtn');
+    const crossBtn = document.getElementById('crossBtn');
+
+   
+    checkBtn.addEventListener('click', () => {
+      console.log("Галочка натиснута");
+    });
+
+    
+    crossBtn.addEventListener('click', () => {
+      console.log("Хрестик натиснутий");
+    });
+  </script>
+</body>
+</html>
