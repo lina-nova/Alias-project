@@ -1,98 +1,42 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аліас - Ігрова Сторінка</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #c1f4d1, #ffd7b5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
-        .progress-bar {
-            width: 90%;
-            height: 20px;
-            background-color: #e0e0e0;
-            margin: 10px auto;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .progress {
-            width: 40%; /* Тут змінюйте ширину для відображення прогресу */
-            height: 100%;
-            background-color: #d32f2f;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            width: 90%;
-            margin-top: 10px;
-            font-size: 1.2em;
-        }
-        .card {
-            background-color: white;
-            width: 300px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 2em;
-            font-weight: bold;
-        }
-        .controls {
-            display: flex;
-            justify-content: space-around;
-            width: 90%;
-        }
-        .button {
-            width: 100px;
-            height: 50px;
-            font-size: 1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button-red {
-            background-color: #d32f2f;
-            color: white;
-        }
-        .button-red:hover {
-            background-color: #a82828;
-        }
-        .button-green {
-            background-color: #388e3c;
-            color: white;
-        }
-        .button-green:hover {
-            background-color: #2e7030;
-        }
-        .menu {
-            background-color: #fff9c4;
-            color: #000;
-        }
-        .menu:hover {
-            background-color: #f0e68c;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аліас - Ігрова Сторінка</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
-        <div>1 РАУНД</div>
-        <div>38</div>
-        <div>1 КОМАНДА</div>
+  <header>
+    <div class="header-info">
+      <span>1 РАУНД</span>
+      <span id="timer">38</span>
+      <span>1 КОМАНДА</span>
     </div>
     <div class="progress-bar">
-        <div class="progress"></div>
+      <div id="progressBar" class="progress"></div>
     </div>
-    <div class="card">МАШИНА</div>
-    <div class="controls
+  </header>
+  <main>
+    <div class="card">
+      <div class="card-border"></div>
+      <span>МАШИНА</span>
+    </div>
+  </main>
+  <div class="controls">
+    <div class="button cross">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="button check">
+      <i class="fas fa-check"></i>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-buttons">
+      <div class="footer-button">МЕНЮ</div>
+      <div class="footer-button">ПРОДОВЖИТИ</div>
+    </div>
+  </footer>
+</body>
+</html>
