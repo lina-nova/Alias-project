@@ -1,75 +1,223 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #a8f0d1, #ffddb0);
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #c1f4d1, #ffd7b5);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.container {
-    width: 100%;
-    max-width: 400px;
+.page1-container {
     text-align: center;
 }
 
-.header {
-    background: white;
-    padding: 15px 0;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
+h1 {
+    font-size: 4em;
+    color: #2a722f;
     margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.subheader {
-    background: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0 auto 20px auto;
+h2 {
+    font-size: 1.5em;
+    color: #2a722f;
+}
+
+.page1-button {
     display: inline-block;
+    background-color: #2a722f;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.team {
+.page1-button:hover {
+    background-color: #1f5926;
+}
+
+header {
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.header-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    margin: 10px auto;
-    background: white;
-    border-radius: 25px;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bold;
-    text-transform: uppercase;
-    width: 90%;
-    max-width: 350px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.team-score {
-    font-size: 24px;
-    color: #333;
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin-top: 8px;
 }
 
-.end-game-btn {
-    background: #fffcdc;
-    color: #333;
-    padding: 10px 20px;
-    border: 2px solid #d0ad09;
-    border-radius: 25px;
+.progress {
+    height: 8px;
+    background-color: #c9302c;
+    border-radius: 4px;
+    width: 70%;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.card {
+    background-color: white;
+    width: 200px;
+    height: 300px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.card-border {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border: 1px solid black;
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.card span {
     font-size: 18px;
     font-weight: bold;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.button {
+    width: 100px;
+    height: 64px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    margin-top: 20px;
-    text-transform: uppercase;
-    transition: background 0.3s ease;
+    transition: transform 0.2s;
 }
 
-.end-game-btn:hover {
-    background: #fff5b0;
+.button:hover {
+    transform: scale(1.1);
 }
+
+.button i {
+    font-size: 32px;
+}
+
+.button.cross i {
+    color: #c9302c;
+}
+
+.button.check i {
+    color: #28a745;
+}
+
+footer {
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-button {
+    width: 120px;
+    height: 40px;
+    background-color: #fff3cd;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.footer-button:hover {
+    background-color: #ffe8a1;
+    transform: scale(1.1);
+}
+
+.score {
+    font-size: 1.2em;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 400px;
+}
+
+.list {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px 0;
+}
+
+.item {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.item.green {
+    background-color: #4caf50;
+    color: white;
+}
+
+.item.red {
+    background-color: #f44336;
+    color: white;
+}
+  
