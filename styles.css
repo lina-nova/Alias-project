@@ -204,6 +204,15 @@ footer {
     transform: scale(1.1);
 }
 
+.page3-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
 .score {
     font-size: 1.2em;
     margin: 10px;
