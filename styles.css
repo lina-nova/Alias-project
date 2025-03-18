@@ -251,3 +251,68 @@ footer {
     color: white;
 }
   
+.page4-container {
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    
+    
+    .header {
+        background: white;
+        padding: 15px 0;
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .subheader {
+        background: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 auto 20px auto;
+        display: inline-block;
+    }
+    
+    .team {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        margin: 10px auto;
+        background: white;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 90%;
+        max-width: 350px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .team-score {
+        font-size: 24px;
+        color: #333;
+    }
+    
+    .end-game-btn {
+        background: #fffcdc;
+        color: #333;
+        padding: 10px 20px;
+        border: 2px solid #d0ad09;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        text-transform: uppercase;
+        transition: background 0.3s ease;
+    }
+    
+    .end-game-btn:hover {
+        background: #fff5b0;
+    }
+    }
