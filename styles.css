@@ -221,9 +221,14 @@ footer {
     border-radius: 10px;
     background: white;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 90%;
     max-width: 400px;
+}
+
+.score-label {
+    text-align: left;
 }
 
 .list {
