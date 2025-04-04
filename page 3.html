@@ -7,18 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>РЕЗУЛЬТАТИ РАУНДУ</h1>
-    <div class="score">
-        <span>КІЛЬКІСТЬ НАБРАНИХ БАЛІВ ЗА 1 РАУНД:</span>
-        <span>2</span>
+    <div id="root">
+        <div class="page3-container">
+            <h1>РЕЗУЛЬТАТИ РАУНДУ</h1>
+            <div class="score">
+                <span class="score-label">КІЛЬКІСТЬ НАБРАНИХ БАЛІВ ЗА <span id="round-number">1</span> РАУНД:</span>
+                <span id="score-number">2</span>
+            </div>
+            <div class="list">
+                <div class="item green">Вгадані слова:</div>
+                <div class="item green" id="guessed-words">МАШИНА, КІТ</div>
+                <div class="item yellow">Пропущені слова:</div>
+                <div class="item yellow" id="skipped-words">СОБАКА</div>
+                <div class="item red">Невгадані слова:</div>
+                <div class="item red" id="not-guessed-words">КОМП’ЮТЕР</div>
+            </div>
+            <div class="controls">
+                <button class="button">МЕНЮ</button>
+                <button class="button">ДАЛІ</button>
+            </div>
+        </div>
     </div>
-    <div class="list">
-        <div class="item green">УСПІХ</div>
-        <div class="item red">ПОМИЛКА</div>
-    </div>
-    <div class="controls">
-        <button class="button">МЕНЮ</button>
-        <button class="button">ДАЛІ</button>
-    </div>
+    <script src="app.js"></script>
 </body>
 </html>
