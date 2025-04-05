@@ -23,15 +23,18 @@
             <main>
               <div class="card">
                 <div class="card-border"></div>
-                <span>МАШИНА</span>
+                <span id="word-container">МАШИНА</span>
               </div>
             </main>
             <div class="controls">
-              <div class="button cross">
-                <i class="fas fa-times"></i>
+              <div class="button cross" id="skip-word-button">
+                <i class="fas fa-times"></i> 
               </div>
-              <div class="button check">
-                <i class="fas fa-check"></i>
+              <div class="button skip" id="skip-current-button">
+                <span>Пропустити</span> 
+              </div>
+              <div class="button check" id="correct-word-button">
+                <i class="fas fa-check"></i> 
               </div>
             </div>
             <footer>
@@ -42,5 +45,6 @@
             </footer>
         </div>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>
