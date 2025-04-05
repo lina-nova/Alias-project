@@ -323,7 +323,6 @@ footer {
     text-transform: uppercase;
     transition: background 0.3s ease;
 }
-
 .end-game-btn:hover {
     background: #fff5b0;
 }
