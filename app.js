@@ -1,6 +1,3 @@
-const myElement = 4;
-let anotherElement = 5;
-
 const allWords = ['МАШИНА', 'КІТ', 'СОБАКА', 'КОМП’ЮТЕР', 'СТІЛ', 'СТІЛЕЦЬ'];
 let currentWordIndex = 0;
 
@@ -10,8 +7,7 @@ let currentTeamNumber = 1;
 let team1Score = 0; 
 let team2Score = 0; 
 
-const guessedWords = [];
-const notGuessedWords = []; 
+const roundResults = [];
 
 const showWelcomePage = () => {
     const root = document.getElementById('root');
@@ -23,8 +19,7 @@ const showWelcomePage = () => {
         </div>
     `;
 
-    const startGameButton = document.getElementById('start-game-button');
-    startGameButton.addEventListener('click', showRoundPage);
+    document.getElementById('start-game-button').addEventListener('click', showRoundPage);
 };
 
 const showRoundPage = () => {
@@ -82,9 +77,8 @@ const updateWord = () => {
     }
 };
 
-
 const guessCurrentWord = () => {
-    guessedWords.push(allWords[currentWordIndex]);
+    roundResults.push({ word: allWords[currentWordIndex], guessed: true });
     if (currentTeamNumber === 1) {
         team1Score++; 
     } else {
@@ -95,7 +89,7 @@ const guessCurrentWord = () => {
 };
 
 const markAsNotGuessed = () => {
-    notGuessedWords.push(allWords[currentWordIndex]); 
+    roundResults.push({ word: allWords[currentWordIndex], guessed: false });
     currentWordIndex++; 
     updateWord();
 };
@@ -122,16 +116,9 @@ const showRoundResultPage = () => {
 
     const resultContainer = document.getElementById('round-result-words');
 
-    guessedWords.forEach((word) => {
+    roundResults.forEach(({ word, guessed }) => {
         const wordDiv = document.createElement('div');
-        wordDiv.className = 'item green'; 
-        wordDiv.innerText = word;
-        resultContainer.appendChild(wordDiv);
-    });
-
-    notGuessedWords.forEach((word) => {
-        const wordDiv = document.createElement('div');
-        wordDiv.className = 'item red'; 
+        wordDiv.className = guessed ? 'item green' : 'item red'; 
         wordDiv.innerText = word;
         resultContainer.appendChild(wordDiv);
     });
@@ -160,4 +147,5 @@ const showGameResultPage = () => {
         </div>
     `;
 };
+
 showWelcomePage();
