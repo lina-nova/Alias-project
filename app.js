@@ -1,10 +1,6 @@
 const myElement = 4;
 let anotherElement = 5;
 
-const myFunction = () => {
-    console.log('Hello worlds');
-};
-
 const allWords = ['МАШИНА', 'КІТ', 'СОБАКА', 'КОМП’ЮТЕР', 'СТІЛ', 'СТІЛЕЦЬ'];
 let currentWordIndex = 0;
 
@@ -14,8 +10,7 @@ let currentTeamNumber = 1;
 let team1Score = 0; 
 let team2Score = 0; 
 
-const guessedWords = []; 
-const skippedWords = []; 
+const guessedWords = [];
 const notGuessedWords = []; 
 
 const showWelcomePage = () => {
@@ -56,9 +51,6 @@ const showRoundPage = () => {
                 <div class="button cross" id="not-guessed-word-button">
                     <i class="fas fa-times"></i> 
                 </div>
-                <div class="button skip" id="skip-current-button">
-                    <span>Пропустити</span> 
-                </div>
                 <div class="button check" id="correct-word-button">
                     <i class="fas fa-check"></i> 
                 </div>
@@ -77,7 +69,6 @@ const showRoundPage = () => {
     updateWord();
 
     document.getElementById('correct-word-button').addEventListener('click', guessCurrentWord);
-    document.getElementById('skip-current-button').addEventListener('click', skipCurrentWord);
     document.getElementById('not-guessed-word-button').addEventListener('click', markAsNotGuessed); 
     document.getElementById('next-round-button').addEventListener('click', showRoundResultPage);
 };
@@ -103,14 +94,6 @@ const guessCurrentWord = () => {
     updateWord();
 };
 
-
-const skipCurrentWord = () => {
-    skippedWords.push(allWords[currentWordIndex]); 
-    currentWordIndex++; 
-    updateWord();
-};
-
-
 const markAsNotGuessed = () => {
     notGuessedWords.push(allWords[currentWordIndex]); 
     currentWordIndex++; 
@@ -127,14 +110,7 @@ const showRoundResultPage = () => {
                 <span class="score-label">КІЛЬКІСТЬ НАБРАНИХ БАЛІВ ЗА <span id="round-number">${roundNumber}</span> РАУНД:</span>
                 <span id="score-number">${team1Score}</span>
             </div>
-            <div class="list">
-                <div class="item green">Вгадані слова:</div>
-                <div class="item green">${guessedWords.join(', ') || 'Немає'}</div>
-                <div class="item yellow">Пропущені слова:</div>
-                <div class="item yellow">${skippedWords.join(', ') || 'Немає'}</div>
-                <div class="item red">Невгадані слова:</div>
-                <div class="item red">${notGuessedWords.join(', ') || 'Немає'}</div>
-            </div>
+            <div class="list" id="round-result-words"></div>
             <footer>
                 <div class="footer-buttons">
                     <button class="footer-button menu-button">МЕНЮ</button>
@@ -143,6 +119,22 @@ const showRoundResultPage = () => {
             </footer>
         </div>
     `;
+
+    const resultContainer = document.getElementById('round-result-words');
+
+    guessedWords.forEach((word) => {
+        const wordDiv = document.createElement('div');
+        wordDiv.className = 'item green'; 
+        wordDiv.innerText = word;
+        resultContainer.appendChild(wordDiv);
+    });
+
+    notGuessedWords.forEach((word) => {
+        const wordDiv = document.createElement('div');
+        wordDiv.className = 'item red'; 
+        wordDiv.innerText = word;
+        resultContainer.appendChild(wordDiv);
+    });
 
     document.getElementById('continue-button').addEventListener('click', showGameResultPage);
 };
@@ -168,22 +160,4 @@ const showGameResultPage = () => {
         </div>
     `;
 };
-
-const addStyles = () => {
-    // тут я спробувала додати стилі, бо без цього деякі з них не відображалися
-    const fontAwesomeLink = document.createElement('link');
-    fontAwesomeLink.rel = 'stylesheet';
-    fontAwesomeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
-    document.head.appendChild(fontAwesomeLink);
-
-    const localStylesLink = document.createElement('link');
-    localStylesLink.rel = 'stylesheet';
-    localStylesLink.href = 'styles.css';
-    document.head.appendChild(localStylesLink);
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    addStyles();
-});
-
 showWelcomePage();
