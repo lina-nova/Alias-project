@@ -1,11 +1,22 @@
-const allWords = ['МАШИНА', 'КІТ', 'СОБАКА', 'КОМП’ЮТЕР', 'СТІЛ', 'СТІЛЕЦЬ'];
+const allWords = [
+    'МАШИНА', 'КІТ', 'СОБАКА', 'КОМП’ЮТЕР', 'СТІЛ', 'СТІЛЕЦЬ',
+    'ДЕРЕВО', 'КНИГА', 'РІКА', 'СОНЦЕ', 'ГОДИННИК', 'ТЕЛЕФОН',
+    'ЗЕМЛЯ', 'НЕБО', 'КВІТКА', 'ЛІС', 'ДОЩ', 'ГОРИ',
+    'ПТАХ', 'ВІТЕР', 'ЛЮДИНА', 'ОКЕАН', 'ДИВАН', 'КАРТИНА',
+    'СВІТЛО', 'БУДИНОК', 'ВОДА', 'ЧАС', 'ХМАРА', 'ДОРІГ',
+    'ЛАМПА', 'СТІНА', 'ДВЕРІ', 'ОЗЕРО', 'ШОКОЛАД', 'СЛОВО',
+    'ЛІТО', 'ОСІНЬ', 'ВЕСНА', 'ЗИМА'
+];
+
 let currentWordIndex = 0;
+let roundNumber = 1;
+let currentTeamNumber = 1;
 
-let roundNumber = 1; 
-let currentTeamNumber = 1; 
+let team1Score = 0;
+let team2Score = 0;
 
-let team1Score = 0; 
-let team2Score = 0; 
+const roundLength = 5;
+let roundLastWordIndex = roundLength - 1;
 
 const roundResults = [];
 
@@ -23,14 +34,16 @@ const showWelcomePage = () => {
 };
 
 const showRoundPage = () => {
+    roundLastWordIndex = Math.min(currentWordIndex + roundLength - 1, allWords.length - 1);
+
     const root = document.getElementById('root');
     root.innerHTML = `
         <div class="page2-container">
             <header class="round-header">
                 <div class="header-info">
-                    <span><span id="round-number"></span> РАУНД</span>
+                    <span>${roundNumber} РАУНД</span>
                     <span id="timer">38</span>
-                    <span><span id="team-number"></span> КОМАНДА</span>
+                    <span>${currentTeamNumber} КОМАНДА</span>
                 </div>
                 <div class="progress-bar">
                     <div id="progressBar" class="progress"></div>
@@ -59,50 +72,47 @@ const showRoundPage = () => {
         </div>
     `;
 
-    document.getElementById('round-number').innerText = roundNumber;
-    document.getElementById('team-number').innerText = currentTeamNumber;
     updateWord();
 
     document.getElementById('correct-word-button').addEventListener('click', guessCurrentWord);
-    document.getElementById('not-guessed-word-button').addEventListener('click', markAsNotGuessed); 
+    document.getElementById('not-guessed-word-button').addEventListener('click', markAsNotGuessed);
     document.getElementById('next-round-button').addEventListener('click', showRoundResultPage);
 };
 
 const updateWord = () => {
     const wordContainer = document.getElementById('word-container');
-    if (currentWordIndex < allWords.length) {
+    if (currentWordIndex <= roundLastWordIndex) {
         wordContainer.innerText = allWords[currentWordIndex];
     } else {
-        showRoundResultPage(); 
+        showRoundResultPage();
     }
 };
 
 const guessCurrentWord = () => {
     roundResults.push({ word: allWords[currentWordIndex], guessed: true });
     if (currentTeamNumber === 1) {
-        team1Score++; 
+        team1Score++;
     } else {
-        team2Score++;  
+        team2Score++;
     }
-    currentWordIndex++; 
+    currentWordIndex++;
     updateWord();
 };
 
 const markAsNotGuessed = () => {
     roundResults.push({ word: allWords[currentWordIndex], guessed: false });
-    currentWordIndex++; 
+    currentWordIndex++;
     updateWord();
 };
 
 const showRoundResultPage = () => {
     const root = document.getElementById('root');
-
     root.innerHTML = `
         <div class="page3-container">
             <h1>РЕЗУЛЬТАТИ РАУНДУ</h1>
             <div class="score">
-                <span class="score-label">КІЛЬКІСТЬ НАБРАНИХ БАЛІВ ЗА <span id="round-number">${roundNumber}</span> РАУНД:</span>
-                <span id="score-number">${team1Score}</span>
+                <span class="score-label">КІЛЬКІСТЬ НАБРАНИХ БАЛІВ:</span>
+                <span id="score-number">${currentTeamNumber === 1 ? team1Score : team2Score}</span>
             </div>
             <div class="list" id="round-result-words"></div>
             <footer>
@@ -123,7 +133,20 @@ const showRoundResultPage = () => {
         resultContainer.appendChild(wordDiv);
     });
 
-    document.getElementById('continue-button').addEventListener('click', showGameResultPage);
+    document.getElementById('continue-button').addEventListener('click', startNextRound);
+};
+
+const startNextRound = () => {
+    roundResults.length = 0;
+    currentTeamNumber = currentTeamNumber === 1 ? 2 : 1;
+    roundNumber++;
+    currentWordIndex = roundLastWordIndex + 1;
+
+    if (currentWordIndex >= allWords.length) {
+        showGameResultPage();
+    } else {
+        showRoundPage();
+    }
 };
 
 const showGameResultPage = () => {
