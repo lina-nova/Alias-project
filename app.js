@@ -17,6 +17,7 @@ let team2Score = 0;
 
 const roundDuration = 6; // Змінити на 60 для реальної гри
 let remainingTime = roundDuration;
+let roundLastWordIndex = allWords.length - 1;
 
 let intervalId;
 
@@ -36,6 +37,7 @@ const showWelcomePage = () => {
 };
 
 const showRoundPage = () => {
+    roundLastWordIndex = allWords.length - 1; 
     const root = document.getElementById('root');
     root.innerHTML = `
         <div class="page2-container">
@@ -89,14 +91,13 @@ const startTimer = () => {
         if (remainingTime <= 0) {
             clearInterval(intervalId);
             roundLastWordIndex = currentWordIndex;
-            showRoundResultPage();
         }
     }, 1000);
 };
 
 const updateWord = () => {
     const wordContainer = document.getElementById('word-container');
-    if (currentWordIndex < allWords.length) {
+    if (currentWordIndex <= roundLastWordIndex) {
         wordContainer.innerText = allWords[currentWordIndex];
     } else {
         showRoundResultPage();
@@ -104,20 +105,24 @@ const updateWord = () => {
 };
 
 const guessCurrentWord = () => {
-    roundResults.push({ word: allWords[currentWordIndex], guessed: true });
-    if (currentTeamNumber === 1) {
-        team1Score++;
-    } else {
-        team2Score++;
+    if (currentWordIndex <= roundLastWordIndex) {
+        roundResults.push({ word: allWords[currentWordIndex], guessed: true });
+        if (currentTeamNumber === 1) {
+            team1Score++;
+        } else {
+            team2Score++;
+        }
+        currentWordIndex++;
+        updateWord();
     }
-    currentWordIndex++;
-    updateWord();
 };
 
 const markAsNotGuessed = () => {
-    roundResults.push({ word: allWords[currentWordIndex], guessed: false });
-    currentWordIndex++;
-    updateWord();
+    if (currentWordIndex <= roundLastWordIndex) {
+        roundResults.push({ word: allWords[currentWordIndex], guessed: false });
+        currentWordIndex++;
+        updateWord();
+    }
 };
 
 const showRoundResultPage = () => {
@@ -189,3 +194,4 @@ const showGameResultPage = () => {
 };
 
 showWelcomePage();
+
