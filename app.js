@@ -15,8 +15,11 @@ let currentTeamNumber = 1;
 let team1Score = 0;
 let team2Score = 0;
 
-const roundLength = 5;
-let roundLastWordIndex = roundLength - 1;
+const roundDuration = 6; // Змінити на 60 для реальної гри
+let remainingTime = roundDuration;
+let roundLastWordIndex = allWords.length - 1;
+
+let intervalId;
 
 const roundResults = [];
 
@@ -34,15 +37,14 @@ const showWelcomePage = () => {
 };
 
 const showRoundPage = () => {
-    roundLastWordIndex = Math.min(currentWordIndex + roundLength - 1, allWords.length - 1);
-
+    roundLastWordIndex = allWords.length - 1; 
     const root = document.getElementById('root');
     root.innerHTML = `
         <div class="page2-container">
             <header class="round-header">
                 <div class="header-info">
                     <span>${roundNumber} РАУНД</span>
-                    <span id="timer">38</span>
+                    <span id="timer">${remainingTime}</span>
                     <span>${currentTeamNumber} КОМАНДА</span>
                 </div>
                 <div class="progress-bar">
@@ -72,11 +74,25 @@ const showRoundPage = () => {
         </div>
     `;
 
+    startTimer();
     updateWord();
 
     document.getElementById('correct-word-button').addEventListener('click', guessCurrentWord);
     document.getElementById('not-guessed-word-button').addEventListener('click', markAsNotGuessed);
     document.getElementById('next-round-button').addEventListener('click', showRoundResultPage);
+};
+
+const startTimer = () => {
+    const timerElement = document.getElementById('timer');
+    intervalId = setInterval(() => {
+        remainingTime--;
+        timerElement.innerText = remainingTime;
+
+        if (remainingTime <= 0) {
+            clearInterval(intervalId);
+            roundLastWordIndex = currentWordIndex;
+        }
+    }, 1000);
 };
 
 const updateWord = () => {
@@ -89,23 +105,29 @@ const updateWord = () => {
 };
 
 const guessCurrentWord = () => {
-    roundResults.push({ word: allWords[currentWordIndex], guessed: true });
-    if (currentTeamNumber === 1) {
-        team1Score++;
-    } else {
-        team2Score++;
+    if (currentWordIndex <= roundLastWordIndex) {
+        roundResults.push({ word: allWords[currentWordIndex], guessed: true });
+        if (currentTeamNumber === 1) {
+            team1Score++;
+        } else {
+            team2Score++;
+        }
+        currentWordIndex++;
+        updateWord();
     }
-    currentWordIndex++;
-    updateWord();
 };
 
 const markAsNotGuessed = () => {
-    roundResults.push({ word: allWords[currentWordIndex], guessed: false });
-    currentWordIndex++;
-    updateWord();
+    if (currentWordIndex <= roundLastWordIndex) {
+        roundResults.push({ word: allWords[currentWordIndex], guessed: false });
+        currentWordIndex++;
+        updateWord();
+    }
 };
 
 const showRoundResultPage = () => {
+    clearInterval(intervalId);
+
     const root = document.getElementById('root');
     root.innerHTML = `
         <div class="page3-container">
@@ -128,7 +150,7 @@ const showRoundResultPage = () => {
 
     roundResults.forEach(({ word, guessed }) => {
         const wordDiv = document.createElement('div');
-        wordDiv.className = guessed ? 'item green' : 'item red'; 
+        wordDiv.className = guessed ? 'item green' : 'item red';
         wordDiv.innerText = word;
         resultContainer.appendChild(wordDiv);
     });
@@ -140,7 +162,7 @@ const startNextRound = () => {
     roundResults.length = 0;
     currentTeamNumber = currentTeamNumber === 1 ? 2 : 1;
     roundNumber++;
-    currentWordIndex = roundLastWordIndex + 1;
+    remainingTime = roundDuration;
 
     if (currentWordIndex >= allWords.length) {
         showGameResultPage();
@@ -172,3 +194,4 @@ const showGameResultPage = () => {
 };
 
 showWelcomePage();
+
