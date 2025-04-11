@@ -15,7 +15,7 @@ let currentTeamNumber = 1;
 let team1Score = 0;
 let team2Score = 0;
 
-const roundDuration = 6; // Змінити на 60 для реальної гри
+const roundDuration = 60; 
 let remainingTime = roundDuration;
 let roundLastWordIndex = allWords.length - 1;
 
@@ -37,7 +37,7 @@ const showWelcomePage = () => {
 };
 
 const showRoundPage = () => {
-    roundLastWordIndex = allWords.length - 1; 
+    roundLastWordIndex = allWords.length - 1;
     const root = document.getElementById('root');
     root.innerHTML = `
         <div class="page2-container">
@@ -84,6 +84,11 @@ const showRoundPage = () => {
 
 const startTimer = () => {
     const timerElement = document.getElementById('timer');
+    const progressBar = document.getElementById('progressBar');
+
+    progressBar.style.width = '100%';
+    progressBar.style.transition = `width ${roundDuration}s linear`;
+
     intervalId = setInterval(() => {
         remainingTime--;
         timerElement.innerText = remainingTime;
@@ -93,6 +98,10 @@ const startTimer = () => {
             roundLastWordIndex = currentWordIndex;
         }
     }, 1000);
+
+    setTimeout(() => {
+        progressBar.style.width = '0%';
+    }, 10); // Запускаємо анімацію
 };
 
 const updateWord = () => {
