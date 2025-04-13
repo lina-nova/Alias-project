@@ -35,21 +35,32 @@ h2 {
     color: #2a722f;
 }
 
-.page1-button {
-    display: inline-block;
-    background-color: #2a722f;
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
+.button-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
-.page1-button:hover {
-    background-color: #1f5926;
+.page1-button { 
+    display: inline-block;
+    background-color: #2a722f; 
+    color: white;
+    padding: 15px 30px; 
+    font-size: 1.5em; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: center;
+     width: 230px;
+    height: 50px; 
+    margin: 10px 0; 
+    display: block; 
 }
+
+.page1-button:hover { 
+    flex-direction: column;
+     background-color: #1f5926;
+    }
 
 .page2-container {
     display: flex;
@@ -97,7 +108,6 @@ h2 {
     width: 100%;
     transition: width 0s;
 }
-
 
 main {
     display: flex;
@@ -314,19 +324,22 @@ footer {
     color: #333;
 }
 
-.end-game-btn {
+.end-game-btn{
     background: #fffcdc;
     color: #333;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: 2px solid #d0ad09;
     border-radius: 25px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 20px;
     text-transform: uppercase;
     transition: background 0.3s ease;
+    white-space: nowrap;
+    display: inline-block;
 }
+
 .end-game-btn:hover {
     background: #fff5b0;
 }
