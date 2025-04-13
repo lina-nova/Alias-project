@@ -22,6 +22,7 @@ let roundLastWordIndex = allWords.length - 1;
 let intervalId;
 
 const roundResults = [];
+let isGamePaused = false;
 
 const showWelcomePage = () => {
     const root = document.getElementById('root');
@@ -29,11 +30,38 @@ const showWelcomePage = () => {
         <div class="page1-container">
             <h1>АЛІАС</h1>
             <h2>ГРА В СЛОВА</h2>
-            <button id="start-game-button" class="page1-button">НОВА ГРА</button>
+            <div class="button-container">
+                <button id="start-game-button" class="page1-button">НОВА ГРА</button>
+                ${isGamePaused ? '<button id="continue-game-button" class="page1-button">ПРОДОВЖИТИ</button>' : ''}
+            </div>
         </div>
     `;
 
-    document.getElementById('start-game-button').addEventListener('click', showRoundPage);
+    document.getElementById('start-game-button').addEventListener('click', () => {
+        isGamePaused = false; 
+        resetGameState();
+        showRoundPage();
+    });
+
+    if (isGamePaused) {
+        document.getElementById('continue-game-button').addEventListener('click', () => {
+            if (currentWordIndex >= allWords.length) {
+                showGameResultPage();
+            } else {
+                showRoundPage();
+            }
+        });
+    }
+};
+
+const resetGameState = () => {
+    currentWordIndex = 0;
+    roundNumber = 1;
+    currentTeamNumber = 1;
+    team1Score = 0;
+    team2Score = 0;
+    remainingTime = roundDuration;
+    roundResults.length = 0;
 };
 
 const showRoundPage = () => {
@@ -67,7 +95,7 @@ const showRoundPage = () => {
             </div>
             <footer>
                 <div class="footer-buttons">
-                    <div class="footer-button menu-button">МЕНЮ</div>
+                    <div class="footer-button menu-button" id="menu-button">МЕНЮ</div>
                     <div id="next-round-button" class="footer-button continue-button">ПРОДОВЖИТИ</div>
                 </div>
             </footer>
@@ -80,6 +108,7 @@ const showRoundPage = () => {
     document.getElementById('correct-word-button').addEventListener('click', guessCurrentWord);
     document.getElementById('not-guessed-word-button').addEventListener('click', markAsNotGuessed);
     document.getElementById('next-round-button').addEventListener('click', showRoundResultPage);
+    
 };
 
 const startTimer = () => {
@@ -101,7 +130,7 @@ const startTimer = () => {
 
     setTimeout(() => {
         progressBar.style.width = '0%';
-    }, 10); // Запускаємо анімацію
+    }, 10);
 };
 
 const updateWord = () => {
@@ -129,11 +158,17 @@ const guessCurrentWord = () => {
 const markAsNotGuessed = () => {
     if (currentWordIndex <= roundLastWordIndex) {
         roundResults.push({ word: allWords[currentWordIndex], guessed: false });
+
+        if (currentTeamNumber === 1) {
+            team1Score--;
+        } else {
+            team2Score--;
+        }
+
         currentWordIndex++;
         updateWord();
     }
 };
-
 const showRoundResultPage = () => {
     clearInterval(intervalId);
 
@@ -195,12 +230,21 @@ const showGameResultPage = () => {
             </div>
             <footer>
                 <div class="footer-buttons">
-                    <button class="footer-button menu-button">МЕНЮ</button>
+                <button class="end-game-btn menu-button">ЗАВЕРШИТИ ГРУ</button>
                 </div>
             </footer>
         </div>
     `;
 };
 
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('menu-button')) {
+        clearInterval(intervalId);
+        isGamePaused = true;
+        showWelcomePage();
+    }
+});
+
 showWelcomePage();
+
 
