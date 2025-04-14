@@ -23,6 +23,12 @@ let intervalId;
 
 const roundResults = [];
 let isGamePaused = false;
+let isRoundInProgress = false;
+
+const stopTimer = () => {
+    clearInterval(intervalId);
+    intervalId = 0;
+};
 
 const showWelcomePage = () => {
     const root = document.getElementById('root');
@@ -45,10 +51,11 @@ const showWelcomePage = () => {
 
     if (isGamePaused) {
         document.getElementById('continue-game-button').addEventListener('click', () => {
-            if (currentWordIndex >= allWords.length) {
-                showGameResultPage();
-            } else {
+            isGamePaused = false;
+            if (isRoundInProgress) {
                 showRoundPage();
+            } else {
+                showRoundResultPage();
             }
         });
     }
@@ -108,7 +115,6 @@ const showRoundPage = () => {
     document.getElementById('correct-word-button').addEventListener('click', guessCurrentWord);
     document.getElementById('not-guessed-word-button').addEventListener('click', markAsNotGuessed);
     document.getElementById('next-round-button').addEventListener('click', showRoundResultPage);
-    
 };
 
 const startTimer = () => {
@@ -123,7 +129,7 @@ const startTimer = () => {
         timerElement.innerText = remainingTime;
 
         if (remainingTime <= 0) {
-            clearInterval(intervalId);
+            stopTimer();
             roundLastWordIndex = currentWordIndex;
         }
     }, 1000);
@@ -169,8 +175,9 @@ const markAsNotGuessed = () => {
         updateWord();
     }
 };
+
 const showRoundResultPage = () => {
-    clearInterval(intervalId);
+    stopTimer();
 
     const root = document.getElementById('root');
     root.innerHTML = `
@@ -239,12 +246,12 @@ const showGameResultPage = () => {
 
 document.addEventListener('click', (event) => {
     if (event.target.classList.contains('menu-button')) {
-        clearInterval(intervalId);
+        const roundInProgress = intervalId !== 0;
+        stopTimer();
         isGamePaused = true;
+        isRoundInProgress = roundInProgress;
         showWelcomePage();
     }
 });
 
 showWelcomePage();
-
-
