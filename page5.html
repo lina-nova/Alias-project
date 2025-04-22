@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагувати список слів</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page5-container">
+        <h1>Редагувати список слів</h1>
+        <textarea 
+    id="word-list-textarea" 
+    maxlength="2000" 
+    style="height: calc(100vh - 120px); width: 100%;" 
+    placeholder="Введіть слова через кому"
+>${allWords.join(', ')}</textarea>
+        <footer>
+            <div class="footer-buttons">
+                <button class="footer-button menu-button" id="back-button">МЕНЮ</button>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
