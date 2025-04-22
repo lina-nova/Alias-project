@@ -51,7 +51,7 @@ h2 {
     border-radius: 5px; 
     cursor: pointer; 
     text-decoration: center;
-     width: 230px;
+     width: 250px;
     height: 50px; 
     margin: 10px 0; 
     display: block; 
@@ -343,3 +343,56 @@ footer {
 .end-game-btn:hover {
     background: #fff5b0;
 }
+
+.page5-container { 
+    width: 100%;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+       
+.h1 {
+    background: white;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.words-textarea {
+    width: 100%; 
+    height: calc(100vh - 200px); 
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #2a722f;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.menu-button {
+    width: 120px;
+    height: 40px;
+    background-color: #fff3cd;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.menu-button:hover {
+    background-color: #ffe8a1;
+    transform: scale(1.1);
+};
+
