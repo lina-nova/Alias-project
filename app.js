@@ -78,13 +78,13 @@ const showSettingsPage = () => {
     const root = document.getElementById('root');
     root.innerHTML = `
         <div class="page5-container">
-            <h1>Редагувати список слів</h1>
+            <h1 class="settings-header">Редагувати список слів</h1>
             <textarea 
-    id="word-list-textarea" 
-    maxlength="2000" 
-    style="height: calc(100vh - 120px); width: 100%;" 
-    placeholder="Введіть слова через кому"
->${allWords.join(', ')}</textarea>
+                id="word-list-textarea" 
+                maxlength="2000"
+                class="words-textarea"
+                placeholder="Введіть слова через кому"
+            >${allWords.join(', ')}</textarea>
             <footer>
                 <div class="footer-buttons">
                     <button class="footer-button menu-button" id="back-button">МЕНЮ</button>
@@ -119,20 +119,22 @@ const showRoundPage = () => {
                   <div id="progressBar" class="progress"></div>
               </div>
           </header>
-          <main>
-              <div class="card">
-                  <div class="card-border"></div>
-                  <span id="word-container"></span>
-              </div>
+          <main class="page-scroll-container">
+            <div class="page-content">
+                <div class="card">
+                    <div class="card-border"></div>
+                    <span id="word-container"></span>
+                </div>
+                <div class="controls">
+                    <div class="button cross" id="not-guessed-word-button">
+                        <i class="fas fa-times"></i> 
+                    </div>
+                    <div class="button check" id="correct-word-button">
+                        <i class="fas fa-check"></i> 
+                    </div>
+                </div>
+            </div>
           </main>
-          <div class="controls">
-              <div class="button cross" id="not-guessed-word-button">
-                  <i class="fas fa-times"></i> 
-              </div>
-              <div class="button check" id="correct-word-button">
-                  <i class="fas fa-check"></i> 
-              </div>
-          </div>
           <footer>
               <div class="footer-buttons">
                   <div class="footer-button menu-button" id="menu-button">МЕНЮ</div>
@@ -215,18 +217,22 @@ const showRoundResultPage = () => {
   const root = document.getElementById('root');
   root.innerHTML = `
       <div class="page3-container">
-          <h1>РЕЗУЛЬТАТИ РАУНДУ</h1>
-          <div class="score">
-              <span class="score-label">КІЛЬКІСТЬ НАБРАНИХ БАЛІВ:</span>
-              <span id="score-number">${currentTeamNumber === 1 ? team1Score : team2Score}</span>
-          </div>
-          <div class="list" id="round-result-words"></div>
-          <footer>
-              <div class="footer-buttons">
-                  <button class="footer-button menu-button">МЕНЮ</button>
-                  <button id="continue-button" class="footer-button continue-button">ПРОДОВЖИТИ</button>
+        <main class="page-scroll-container">
+            <div class="page-content">
+                <h1>РЕЗУЛЬТАТИ РАУНДУ</h1>
+                <div class="score">
+                    <span class="score-label">КІЛЬКІСТЬ НАБРАНИХ БАЛІВ:</span>
+                    <span id="score-number">${currentTeamNumber === 1 ? team1Score : team2Score}</span>
+                </div>
+                <div class="list" id="round-result-words"></div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer-buttons">
+                <button class="footer-button menu-button">МЕНЮ</button>
+                <button id="continue-button" class="footer-button continue-button">ПРОДОВЖИТИ</button>
               </div>
-          </footer>
+        </footer>
       </div>
   `;
 
@@ -259,18 +265,22 @@ const showGameResultPage = () => {
   const root = document.getElementById('root');
   root.innerHTML = `
       <div class="page4-container">
-          <div class="header">РЕЗУЛЬТАТИ ГРИ</div>
-          <div class="team">
-              <div class="team-name">1 КОМАНДА</div>
-              <div class="team-score">${team1Score}</div>
-          </div>
-          <div class="team">
-              <div class="team-name">2 КОМАНДА</div>
-              <div class="team-score">${team2Score}</div>
-          </div>
+          <header class="header">РЕЗУЛЬТАТИ ГРИ</header>
+          <main class="page-scroll-container">
+            <div class="page-content">
+                <div class="team">
+                    <div class="team-name">1 КОМАНДА</div>
+                    <div class="team-score">${team1Score}</div>
+                </div>
+                <div class="team">
+                    <div class="team-name">2 КОМАНДА</div>
+                    <div class="team-score">${team2Score}</div>
+                </div>
+            </div>
+          </main>
           <footer>
               <div class="footer-buttons">
-              <button class="end-game-btn menu-button">ЗАВЕРШИТИ ГРУ</button>
+              <button class="end-game-btn">ЗАВЕРШИТИ ГРУ</button>
               </div>
           </footer>
       </div>
