@@ -346,7 +346,7 @@ footer {
 
 .end-game-btn{
     background: #fffcdc;
-    color: #333;
+    color: black !important;
     padding: 8px 16px;
     border: 2px solid #d0ad09;
     border-radius: 25px;
@@ -362,6 +362,7 @@ footer {
 
 .end-game-btn:hover {
     background: #fff5b0;
+    color: black !important;
 }
 
 .page5-container { 
