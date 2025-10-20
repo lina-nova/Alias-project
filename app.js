@@ -1,12 +1,4 @@
-const allWords = JSON.parse(localStorage.getItem('allWords')) || [
-    'МАШИНА', 'КІТ', 'СОБАКА', 'КОМП’ЮТЕР', 'СТІЛ', 'СТІЛЕЦЬ',
-    'ДЕРЕВО', 'КНИГА', 'РІКА', 'СОНЦЕ', 'ГОДИННИК', 'ТЕЛЕФОН',
-    'ЗЕМЛЯ', 'НЕБО', 'КВІТКА', 'ЛІС', 'ДОЩ', 'ГОРИ',
-    'ПТАХ', 'ВІТЕР', 'ЛЮДИНА', 'ОКЕАН', 'ДИВАН', 'КАРТИНА',
-    'СВІТЛО', 'БУДИНОК', 'ВОДА', 'ЧАС', 'ХМАРА', 'ДОРІГ',
-    'ЛАМПА', 'СТІНА', 'ДВЕРІ', 'ОЗЕРО', 'ШОКОЛАД', 'СЛОВО',
-    'ЛІТО', 'ОСІНЬ', 'ВЕСНА', 'ЗИМА'
-];
+let allWords = JSON.parse(localStorage.getItem('allWords')) || [];
 
 let currentWordIndex = 0;
 let roundNumber = 1;
@@ -305,5 +297,13 @@ document.addEventListener('click', (event) => {
         showWelcomePage();
     }
   });
-  
-showWelcomePage();
+
+async function loadGameData() {
+    const response = await fetch('data.json');
+    const data = await response.json();
+    const { words: wordsDataset } = data;
+    const gameId = 11;
+    allWords = wordsDataset[gameId];
+}
+
+loadGameData().then(showWelcomePage);
