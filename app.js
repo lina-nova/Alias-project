@@ -17,6 +17,8 @@ const roundResults = [];
 let isGamePaused = false;
 let isRoundInProgress = false;
 
+const allowSettings = false;
+
 const saveWordsToLocalStorage = () => {
     localStorage.setItem('allWords', JSON.stringify(allWords));
 };
@@ -34,7 +36,8 @@ const showWelcomePage = () => {
             <h2>ГРА В СЛОВА</h2>
             <div class="button-container">
                 <button id="start-game-button" class="page1-button">НОВА ГРА</button>
-                ${isGamePaused ? '<button id="continue-game-button" class="page1-button">ПРОДОВЖИТИ</button>' : '<button id="settings-button" class="page1-button">НАЛАШТУВАННЯ</button>'}
+                ${isGamePaused ? '<button id="continue-game-button" class="page1-button">ПРОДОВЖИТИ</button>' : ''} 
+                ${allowSettings && !isGamePaused ? '<button id="settings-button" class="page1-button">НАЛАШТУВАННЯ</button>' : ''}
             </div>
         </div>
     `;
@@ -54,7 +57,7 @@ const showWelcomePage = () => {
                 showRoundResultPage();
             }
         });
-    } else {
+    } else if (allowSettings) {
         document.getElementById('settings-button').addEventListener('click', showSettingsPage);
     }
 };
