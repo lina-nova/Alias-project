@@ -304,12 +304,22 @@ async function loadGameData() {
         const data = await response.json();
         const { words: wordsDataset } = data;
         const gameId = window.location.search.match(/id=(\d+)/)[1];
-        allWords = wordsDataset[gameId];
+        const randomizedList = randomizeList(wordsDataset[gameId]);
+        allWords = randomizedList;
     } catch (error) {
         const errorMessage = error.toString();
         document.getElementById('root').innerHTML = errorMessage;
         throw error;
     }
+}
+
+function randomizeList(array) {
+    // Alternative: assign random key, then sort by it
+    // This creates a shallow copy, does not mutate original array
+    return array
+        .map(item => ({ item, sortKey: Math.random() }))
+        .sort((a, b) => a.sortKey - b.sortKey)
+        .map(({ item }) => item);
 }
 
 loadGameData().then(showWelcomePage);
