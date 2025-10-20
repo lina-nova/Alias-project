@@ -299,11 +299,17 @@ document.addEventListener('click', (event) => {
   });
 
 async function loadGameData() {
-    const response = await fetch('data.json');
-    const data = await response.json();
-    const { words: wordsDataset } = data;
-    const gameId = 11;
-    allWords = wordsDataset[gameId];
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        const { words: wordsDataset } = data;
+        const gameId = window.location.search.match(/id=(\d+)/)[1];
+        allWords = wordsDataset[gameId];
+    } catch (error) {
+        const errorMessage = error.toString();
+        document.getElementById('root').innerHTML = errorMessage;
+        throw error;
+    }
 }
 
 loadGameData().then(showWelcomePage);
